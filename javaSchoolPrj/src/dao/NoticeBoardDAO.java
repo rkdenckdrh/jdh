@@ -42,17 +42,6 @@ public class NoticeBoardDAO {
 	}
 
 	public List<NoticeBoard> getBoardPage(int start, int size) {
-		String a= "Hello";
-		String b= "Hello";
-		String c= "Java";
-		String d= new String("Hello");
-		String e= new String("Hello");
-		String f= new String("Java");
-		System.out.println(a == b);
-		System.out.println(a == c);
-		System.out.println(a == d);
-		System.out.println(a == e);
-		System.out.println(a == f);
 		List<NoticeBoard> list = new ArrayList<NoticeBoard>();
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -156,6 +145,49 @@ public class NoticeBoardDAO {
 			int n = ps.executeUpdate();
 			if (n == 1) {
 				DBConn.commit(conn);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			DBConn.close(ps);
+			DBConn.close(conn);
+		}
+	}
+
+	public void boardUpdate(NoticeBoard board) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "update tbl_noticeboard set notice_title=?, notice_content=?, notice_filename=? where notice_no=?";
+		try {
+			conn = DBConn.getConnect();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, board.getNotice_title());
+			ps.setString(2, board.getNotice_content());
+			ps.setString(3, board.getNotice_filename());
+			ps.setInt(4, board.getNotice_no());
+			int n = ps.executeUpdate();
+			if (n == 1) {
+				conn.commit();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			DBConn.close(ps);
+			DBConn.close(conn);
+		}
+	}
+
+	public void boardDelete(int bno) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "delete from tbl_noticeboard where notice_no=?";
+		try {
+			conn = DBConn.getConnect();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bno);
+			int n = ps.executeUpdate();
+			if (n == 1) {
+				conn.commit();
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

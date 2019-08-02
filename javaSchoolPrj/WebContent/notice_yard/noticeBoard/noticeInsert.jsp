@@ -26,7 +26,7 @@
 				<td colspan="3"><textarea rows="10" cols="60" name="content"></textarea></td>
 			</tr>
 			<tr>
-				<th style="text-align: center; background-color: #E9ECEF">파일첨부</th>
+				<th style="text-align: center; background-color: #E9ECEF">첨부파일</th>
 				<td colspan="3"><input type="file" name="filename"></td>
 			</tr>
 			<tr>

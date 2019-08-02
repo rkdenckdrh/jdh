@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import noticeBoardService.NoticeDeleteService;
 import noticeBoardService.NoticeInsertFormService;
 import noticeBoardService.NoticeInsertService;
 import noticeBoardService.NoticeListService;
@@ -79,6 +80,8 @@ public class NoticeBoardServlet extends HttpServlet {
 			service = new NoticeUpdateFormService();
 		} else if (command.equals("/noticeUpdate.notice")) {
 			service = new NoticeUpdateService();
+		} else if (command.equals("/noticeDelete.notice")) {
+			service = new NoticeDeleteService();
 		}
 		service.execute(request, response);
 	}
